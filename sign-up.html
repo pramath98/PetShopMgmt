@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PetShop - Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+
+    <section class="ftco-section contact-section" style="background-image: url('images/petshop.jpg'); background-size: cover;"><div class="container">
+        
+
+        <div class="container bg-white" style="align-self: center; align-items: center;">
+          <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-2 ftco-animate text-center"style="background-color: white; border-radius: 10px 10px 10px 10px;margin-bottom: 30px;">
+              <h1 class="mb-0 bread">Sign Up</h1>
+            </div>
+          </div>
+          <form action="phps/signuphelper.php" class="bg-white p-5 contact-form" method="get" >
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="First Name" name="fname" required="">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Last Name" name="lname" required="">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Email ID" name="emailid" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" name="password" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Re-Enter Password" name="password1" required="">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Sign Up" class="btn btn-primary py-3 px-5">
+            </div>
+          </form>
+          <h5><a href="sign-in.html">Already have account? Sign In here</a></h5>
+        </div>
+
+    </section>
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- script for password match -->
+  <script>
+    window.onload = function () {
+      document.getElementById("password").onchange = validatePassword;
+      document.getElementById("password1").onchange = validatePassword;
+    }
+
+    function validatePassword() {
+      var pass2 = document.getElementById("password1").value;
+      var pass1 = document.getElementById("password").value;
+      if (pass1 != pass2)
+        document.getElementById("password1").setCustomValidity("Passwords Don't Match");
+      else
+        document.getElementById("password").setCustomValidity('');
+      //empty string means no validation error
+    }
+  </script>
+  <!-- script for password match -->
+    
+  </body>
+</html>
