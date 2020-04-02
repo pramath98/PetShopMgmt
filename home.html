@@ -35,147 +35,7 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">PetShop</a>
-
-
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-            <li class="nav-item"><a href="phps/logout.php" class="nav-link"><span>Log out</span></a></li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-	<!-- END nav -->
-
-	  <section class="ftco-section-more ftco-animate">
-		<div class="parallax-img d-flex align-items-center">
-			<div class="container" style="margin-bottom: 100px;">
-				<form action="#" class="subscribe-form">
-					<div class="form-group d-flex">
-						<input type="text" class="form-control" placeholder="Search Products...">
-            <!-- <input type="submit" value="Search" class="submit px-3"> -->
-            <a class="submit px-4 " style="margin-bottom: 0.5px;" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories▼</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">DOG</a>
-                <a class="dropdown-item" href="#">CAT</a>
-                <a class="dropdown-item" href="#">Fish</a>
-                <a class="dropdown-item" href="#">guinea pigs</a>
-                <a class="dropdown-item" href="#">Hamsters</a>
-                <a class="dropdown-item" href="#">Parrots</a>
-                <a class="dropdown-item" href="#">Turtle</a>
-					</div>
-				</form>
-			</div>
-      </div>
-
-	  </section>
-	
-	  <section class="ftco-animate ftco-cart">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 ftco-animate">
-                    <div class="cart-list">
-                        <table class="table">
-                            <thead class="thead-primary">
-                            <tr class="text-center">
-                                <th colspan="2">Product</th>
-                                <th>Pet</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th class="price">
-                                </th>
-                            </tr>
-							</thead>
-							<tbody>
-								<tr class="text-center  ftco-animate">
-									
-									<td class="image-prod"><img class="img" src="images/pedigree_dog_food.jpeg"></td>
-									
-									<td class="product-name">
-                                        <h3>Dog Food</h3>
-                                        <p>Comapany: Pedegree</p>
-                                    </td>
-									
-									<td class="price"> DOG </td>
-
-									<td class="price">Rs. 500</td>
-									
-									<td class="price">100</td>
-									<td class="price">
-                                        <p class="text-center ftco-animate"><a href="checkout.html" class="btn btn-primary py-3 px-4">&nbsp Add to cart +&nbsp</a></p>
-                                    </td>
-									
-								</tr><!-- END TR-->
-								<tr class="text-center  ftco-animate">
-									
-									<td class="image-prod"><img class="img" src="images/cat_food.jfif"></td>
-									
-									<td class="product-name">
-                                        <h3>Cat Food</h3>
-                                        <p>Comapany: Felix</p>
-                                    </td>
-									
-									<td class="price"> CAT </td>
-
-									<td class="price">Rs. 300</td>
-									
-									<td class="price">124</td>
-									<td class="price">
-                                        <p class="text-center ftco-animate"><a href="checkout.html" class="btn btn-primary py-3 px-4">&nbsp Add to cart +&nbsp</a></p>
-                                    </td>
-									
-								</tr><!-- END TR-->
-								<tr class="text-center  ftco-animate">
-									
-									<td class="image-prod"><img class="img" src="images/fish_food.jpg"></td>
-									
-									<td class="product-name">
-                                        <h3>Fish Food</h3>
-                                        <p>Comapany: Tetra</p>
-                                    </td>
-									
-									<td class="price"> FISH </td>
-
-									<td class="price">Rs. 700</td>
-									
-									<td class="price">129</td>
-									<td class="price">
-                                        <p class="text-center ftco-animate"><a href="checkout.html" class="btn btn-primary py-3 px-4">&nbsp Add to cart +&nbsp</a></p>
-                                    </td>
-									
-								</tr><!-- END TR-->
-								<tr class="text-center  ftco-animate">
-									
-									<td class="image-prod"><img class="img" src="images/whisks_cat_food.jpg"></td>
-									
-									<td class="product-name">
-                                        <h3>Cat Food</h3>
-                                        <p>Comapany:Whiskas</p>
-                                    </td>
-									
-									<td class="price"> CAT </td>
-
-									<td class="price">Rs. 299</td>
-									
-									<td class="price">200</td>
-									<td class="price">
-                                        <p class="text-center ftco-animate"><a href="checkout.html" class="btn btn-primary py-3 px-4">&nbsp Add to cart +&nbsp</a></p>
-                                    </td>
-									
-								</tr><!-- END TR-->
-								</tbody>
-							</table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    
-  
-
+    <?php include 'phps/show-inventory-user.php';?>
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
   <!-- show message modal -->
@@ -203,5 +63,43 @@
       $('#messageModal').modal('show');
     });
   </script>
+
+<script>
+  $(document).ready(function(){
+
+  var quantitiy=0;
+     $('.quantity-right-plus').click(function(e){
+          
+          // Stop acting like a button
+          e.preventDefault();
+          // Get the field name
+          var quantity = parseInt($('#quantity').val());
+          
+          // If is not undefined
+              
+              $('#quantity').val(quantity + 1);
+
+            
+              // Increment
+          
+      });
+
+       $('.quantity-left-minus').click(function(e){
+          // Stop acting like a button
+          e.preventDefault();
+          // Get the field name
+          var quantity = parseInt($('#quantity').val());
+          
+          // If is not undefined
+        
+              // Increment
+              if(quantity>0){
+              $('#quantity').val(quantity - 1);
+              }
+      });
+      
+  });
+</script>
+
   </body>
 </html>

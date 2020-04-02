@@ -9,7 +9,7 @@ if ($fetch_pet_names_res = mysqli_query($conn, $fetch_pet_names_sql)) {
             echo '<option value="" disabled selected>Select pet</option>';
         }
         if ($operation == "search") {
-            echo '<option value="" disabled selected>Select pet category</option>';
+            echo '<option value="" disabled selected >Select a pet</option>';
         }
 
         while ($fetched_pet_name_row = mysqli_fetch_array($fetch_pet_names_res)) {
