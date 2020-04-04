@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $userid=$_SESSION['userid'];
   if($_SESSION["user"] == NULL ){
     header("location: index.html");
   }
@@ -66,39 +67,39 @@
 
 <script>
   $(document).ready(function(){
-
-  var quantitiy=0;
-     $('.quantity-right-plus').click(function(e){
-          
-          // Stop acting like a button
-          e.preventDefault();
+      
+  });
+  function increment_count(button_name,input_name){
+    var quantity_textfield = document.getElementById(input_name);
+    var button1 = document.getElementById(button_name);
+     // Stop acting like a button
+     //button1.preventDefault();
           // Get the field name
-          var quantity = parseInt($('#quantity').val());
+          var quantity = parseInt(quantity_textfield.value);
           
           // If is not undefined
               
-              $('#quantity').val(quantity + 1);
+              quantity_textfield.value = quantity + 1 ;
 
             
               // Increment
-          
-      });
+  }
 
-       $('.quantity-left-minus').click(function(e){
-          // Stop acting like a button
-          e.preventDefault();
+  function decrement_count(button_name,input_name){
+    var quantity_textfield = document.getElementById(input_name);
+    var button1 = document.getElementById(button_name);
+     // Stop acting like a button
+     //button1.preventDefault();
           // Get the field name
-          var quantity = parseInt($('#quantity').val());
+          var quantity = parseInt(quantity_textfield.value);
           
           // If is not undefined
-        
+          if(quantity>0){
+              quantity_textfield.value = quantity - 1;
+          }
+            
               // Increment
-              if(quantity>0){
-              $('#quantity').val(quantity - 1);
-              }
-      });
-      
-  });
+  }
 </script>
 
   </body>

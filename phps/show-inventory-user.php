@@ -4,6 +4,8 @@
 
 include 'connect.php';
 
+
+
 if(isset($_SESSION['pet_id_filter_user'])) {
     $sql = 'SELECT * from products where animalid='.$_SESSION['pet_id_filter_user'].' AND name LIKE "%'.$_SESSION['prod_search'].'%" ORDER BY name';
 }
@@ -12,7 +14,7 @@ else {
 }
 if ($res = mysqli_query($conn, $sql)) { 
     if (mysqli_num_rows($res) > 0) {
-        $sql1='SELECT * from cart WHERE userid="$_SESSION[userid]"';
+        $sql1='SELECT * from cart WHERE userid="'.$userid.'"';
         $res1=mysqli_query($conn,$sql1);
         $cart_items= mysqli_num_rows($res1);
         echo '
@@ -120,21 +122,21 @@ if ($res = mysqli_query($conn, $sql)) {
 									
 									<td class="price"><h4>₹'.$row['mrp'].'</h4></td>
                                     
-                                <form action="home.html" class="input-group col-md-8 d-flex mb-3" method="GET">
+                                <form action="phps/add_to_cart.php" class="input-group col-md-8 d-flex mb-3" method="GET">
                                     <td class="price">
                                     
                                         <span class="input-group-btn mr-2">
-                                            <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
+                                            <button type="button" class="quantity-left-minus btn" name="decrement_count_'.$row['prodid'].'" id="decrement_count_'.$row['prodid'].'"  data-type="minus" data-field="" onclick="javascript:decrement_count(\'decrement_count_'.$row['prodid'].'\',\'qty_'.$row['prodid'].'\');">
                                                 <i class="ion-ios-remove"></i>
                                             </button>
                                         </span>
                                     </td>
                                     <td class="price">
-                                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+                                        <input type="text" name="qty" id="qty_'.$row['prodid'].'" class="form-control input-number" value="1" min="1" max="100">
                                     </td>
                                     <td class="price">
                                         <span class="input-group-btn ml-2">
-                                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                            <button type="button" class="quantity-right-plus btn" id="increment_count_'.$row['prodid'].'" data-type="plus" data-field="" onclick="javascript:increment_count(\'increment_count_'.$row['prodid'].'\',\'qty_'.$row['prodid'].'\');">
                                             <i class="ion-ios-add"></i>
                                         </button>
                                         </span>
@@ -143,22 +145,26 @@ if ($res = mysqli_query($conn, $sql)) {
                                     </td>
                                    
                                     <td>
-                                        <input type="hidden" name="add" value="'.$row['name'].'"></input>
+                                        <input type="hidden" name="product" value="'.$row['name'].'"></input>
                                         <span class="input-group-btn mr-2">
                                             <input type="submit" class="btn btn-primary py-3 px-4" value="&nbsp Add to cart  &nbsp"></input>
                                         </span>
                                     </td>
                                 </form>
                                         
-								</tr><!-- END TR-->
-								</tbody>';
+                                ';
+
         
         }
-                        echo'</table>
+                        echo'
+                        </tr><!-- END TR-->
+                        </tbody>
+                        </table>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </section>';
     } 
     else { 
@@ -178,7 +184,8 @@ if ($res = mysqli_query($conn, $sql)) {
                     </div>
                 </div>
             </div>
-        </section>';;
+        </section>'; unset($_SESSION['pet_id_filter_user']);
+        unset($_SESSION['prod_search']);
     } 
 } 
 else { 
