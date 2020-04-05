@@ -28,7 +28,7 @@ if($res = mysqli_query($conn, $query)){
         //echo "failure";
         $_SESSION["message"] = "Failed to login !!!";
         //echo $_SESSION["message"];
-        header("location: /petshop_management/index.html");
+       header("location: /petshop_management/index.html");
     }
 }
 ?>

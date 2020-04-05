@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+//session_start();
 
 include 'connect.php';
 
@@ -106,9 +106,11 @@ if ($res = mysqli_query($conn, $sql)) {
     						<span>Total</span>
     						<span>₹'.$total.'</span>
     					</p>
-    				</div>
-					<p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-					
+    				</div><form action="checkout">
+                    <p class="text-center">
+                    <input type="hidden" value="'.$total.'" name="total">
+                    <input type="submit" class="btn btn-primary py-3 px-4" value="Proceed to checkout"></a></p>
+					</form>
     			</div>
     		</div>
 			</div>

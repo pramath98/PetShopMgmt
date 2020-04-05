@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  $userid=$_SESSION['userid'];
+  if($_SESSION["user"] == NULL ){
+    header("location: index.html");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
