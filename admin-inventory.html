@@ -1,7 +1,7 @@
 <?php
   session_start();
   if($_SESSION["admin"] == NULL ){
-    header("location: index.html");
+    header("location: admin-sign-in.html");
   }
 ?>
 <!DOCTYPE html>
@@ -87,7 +87,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="phps/updateInventory.php" method="GET" id="update_inventory_form">
+          <form action="phps/updateInventory.php" method="POST" id="update_inventory_form" enctype="multipart/form-data">
             <div class="form-group" style="display: none;">
               <label for="recipient-name" class="col-form-label">Product ID</label>
               <input type="text" class="form-control border" placeholder=" " name="update_prod_id" id="update_prod_id" required="">
@@ -101,7 +101,6 @@
               <select class="form-control border" name="update_pet_name" id="update_pet_name" required="">
                 <?php $operation="update"; include "phps/pet_list.php"; ?>
               </select>
-
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Company</label>
@@ -114,6 +113,12 @@
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Quantity</label>
               <input type="text" class="form-control border" placeholder=" " name="update_quantity" id="update_quantity" required="">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Image File</label> <br/>
+              <label for="update_file_name" class="btn btn-primary py-2 px-4">Upload Image</label>
+              <input type="file" placeholder=" " name="update_file_name" id="update_file_name" style="visibility: hidden;">
+              <p id="update_file_name_label"></p>
             </div>
             <div class="right-w3l">
               <input type="submit" class="btn btn-primary py-2 px-4" value="update">
@@ -137,7 +142,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="phps/addNewInventory.php" method="GET" id="add_new_inventory_form">
+          <form action="phps/addNewInventory.php" method="POST" id="add_new_inventory_form" enctype="multipart/form-data">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Product Name</label>
               <input type="text" class="form-control border" placeholder=" " name="prod_name" id="prod_name" required="">
@@ -161,8 +166,10 @@
               <input type="text" class="form-control border" placeholder=" " name="quantity" id="quantity" required="">
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Image Name</label>
-              <input type="text" class="form-control border" placeholder=" " name="image_name" id="quantity" required="">
+              <label for="recipient-name" class="col-form-label">Image File</label> <br/>
+              <label for="file_name" class="btn btn-primary py-2 px-4">Upload Image</label>
+              <input type="file" placeholder=" " name="file_name" id="file_name" required="Please select image" style="visibility: hidden;">
+              <p id="file_name_label"></p>
             </div>
             <div class="right-w3l">
               <input type="submit" class="btn btn-primary py-2 px-4" value="save">
@@ -264,6 +271,12 @@
     $(window).load(function () {
       $('#messageModal').modal('show');
     });
+    document.querySelector("#file_name").onchange = function(){
+      document.getElementById("file_name_label").textContent = this.files[0].name;
+    }
+    document.querySelector("#update_file_name").onchange = function(){
+      document.getElementById("update_file_name_label").textContent = this.files[0].name;
+    }
     
   </script>
   

@@ -19,15 +19,17 @@ if ($res = mysqli_query($conn, $sql)) {
         $cart_items= mysqli_num_rows($res1);
         echo '
 
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light bg-light" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="index.html">PetShop</a>
 
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link"><span>Hello, '.$_SESSION['user'].' </span></a></li>
 	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>['.$cart_items.']</a></li>
             <li class="nav-item"><a href="phps/logout.php" class="nav-link"><span>Log out</span></a></li>
+            
 	        </ul>
 	      </div>
 	    </div>
@@ -53,7 +55,7 @@ if ($res = mysqli_query($conn, $sql)) {
 
       </th>
         <th>
-            <input type="submit" class="btn btn-primary py-2 px-3"  value="search">
+            <input type="submit" class="btn btn-primary py-2 px-3" style="left-align:8px" value="search">
             </input>
         </th>
         </tr>
@@ -87,7 +89,7 @@ if ($res = mysqli_query($conn, $sql)) {
                                     </p>    ';
                         }
                 echo'
-                <table class="table">
+                <table class="table bg-light">
                             <thead class="thead-primary">
                             <tr class="text-center">
                                 <th colspan="2">Product</th>
@@ -103,7 +105,7 @@ if ($res = mysqli_query($conn, $sql)) {
 
 							echo'<tbody>
                                 <tr class="text-center  ftco-animate">
-									<td class="image-prod"><div class="img" style="background-image:url(images/'.$row['imagename'].');"></div></td>
+									<td class="image-prod"><div class="img" style="background-image:url(images/product_images/'.$row['imagename'].');"></div></td>
 									</td>
 									<td class="product-name">
                                         <h3>'.$row['name'].'</h3>

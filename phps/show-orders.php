@@ -31,8 +31,8 @@ if ($processingOrdersRes = mysqli_query($conn, $processingOrders)) {
 							echo'<tbody>
 								<tr class="text-center">
 									
-									<td class="product-name">
-										<h3>'.$processingOrdersRow['orderid'].'</h3>
+									<td class="price">
+										<p>'.$processingOrdersRow['orderid'].'</p>
                                     </td>
                                     
                                     <td class="price">
@@ -43,7 +43,7 @@ if ($processingOrdersRes = mysqli_query($conn, $processingOrders)) {
                                         </p>
 									</td>
 									
-                                    <td class="price">
+                                    <td class="product-name">
 
                                         '.$processingOrdersRow['prod_name'].'
                                 
@@ -114,6 +114,7 @@ else {
 
 
 $shippedOrders = 'SELECT * from orderlist where status="shipped" ORDER BY orderid DESC';
+$invoice_amount = 0;
 if ($shippedOrdersRes = mysqli_query($conn, $shippedOrders)) { 
     if (mysqli_num_rows($shippedOrdersRes) > 0) { 
         
@@ -142,8 +143,8 @@ if ($shippedOrdersRes = mysqli_query($conn, $shippedOrders)) {
 							echo'<tbody>
 								<tr class="text-center">
 									
-                                <td class="product-name">
-                                    <h3>'.$shippedOrdersRow['orderid'].'</h3>
+                                <td class="price">
+                                    <p>'.$shippedOrdersRow['orderid'].'</p>
                                 </td>
                                 
                                 <td class="price">
@@ -154,7 +155,7 @@ if ($shippedOrdersRes = mysqli_query($conn, $shippedOrders)) {
                                     </p>
                                 </td>
                                 
-                                <td class="price">
+                                <td class="product-name">
 
                                     '.$shippedOrdersRow['prod_name'].'
                             
@@ -176,14 +177,33 @@ if ($shippedOrdersRes = mysqli_query($conn, $shippedOrders)) {
                                     </td>
 									
 								</tr><!-- END TR-->
-								</tbody>';
+                                </tbody>';
+            $invoice_amount = $invoice_amount + $shippedOrdersRow['total_amt'];
         
         }
                         echo'</table>
                         </div>
                     </div>
                 </div>
+
+            <div class="row justify-content-end">
+    			<div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3">
+    					<h3>Invoice</h3>
+    					<hr>
+    					<p class="d-flex">
+    						<span>Total Shipped Orders</span>
+    						<span>'.mysqli_num_rows($shippedOrdersRes).'</span>
+    					</p>
+    					<p class="d-flex total-price">
+    						<span>Total Earning</span>
+    						<span>₹'.$invoice_amount.'</span>
+    					</p>
+    				</div>
+    			</div>
             </div>
+            </div>
+            
         </section>';
     } 
     else { 

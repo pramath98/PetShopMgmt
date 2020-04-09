@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Mar 30, 2020 at 02:47 PM
+-- Generation Time: Apr 08, 2020 at 07:44 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.12
 
@@ -34,15 +34,16 @@ CREATE TABLE IF NOT EXISTS `animals` (
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `imagename` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`animalid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `animals`
 --
 
 INSERT INTO `animals` (`animalid`, `name`, `imagename`) VALUES
-(1, 'Dog', 'dog.jpg'),
-(6, 'Citten', 'cat.jpg');
+(1, 'Dog', '5e8cc560bfe058.97574227.jpg'),
+(6, 'Cat', '5e8cc4e6cbfd77.14635789.jpg'),
+(7, 'Fish', '5e8cc57e283591.31535601.jpg');
 
 -- --------------------------------------------------------
 
@@ -54,9 +55,19 @@ DROP TABLE IF EXISTS `cart`;
 CREATE TABLE IF NOT EXISTS `cart` (
   `userid` int(255) NOT NULL,
   `prodid` int(255) NOT NULL,
-  KEY `userid` (`userid`) USING BTREE,
-  KEY `prodid` (`prodid`)
+  `qty` int(255) NOT NULL,
+  UNIQUE KEY `userid` (`userid`,`prodid`),
+  KEY `prod_id_foreign_key_in_cart` (`prodid`),
+  KEY `user_id_foreign_key_in_cart` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`userid`, `prodid`, `qty`) VALUES
+(7, 6, 1),
+(8, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -69,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `credentials` (
   `userid` int(255) NOT NULL,
   `emailid` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  UNIQUE KEY `emailid` (`emailid`),
   KEY `userid` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -78,9 +90,9 @@ CREATE TABLE IF NOT EXISTS `credentials` (
 
 INSERT INTO `credentials` (`userid`, `emailid`, `password`) VALUES
 (7, 'pramath@gmail.com', 'root'),
-(8, 'rushi@gmail.com', 'root'),
-(9, 'umesh@gmail.com', 'umesh123'),
-(10, 'shripad@gmail.com', '123');
+(8, 'rushikesh@gmail.com', 'root'),
+(10, 'shripad@gmail.com', '123'),
+(9, 'umesh@gmail.com', 'umesh123');
 
 -- --------------------------------------------------------
 
@@ -92,27 +104,22 @@ DROP TABLE IF EXISTS `orderlist`;
 CREATE TABLE IF NOT EXISTS `orderlist` (
   `orderid` int(255) NOT NULL AUTO_INCREMENT,
   `userid` int(255) DEFAULT NULL,
-  `user_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `user_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `prodid` int(255) DEFAULT NULL,
-  `prod_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `prod_company` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `prod_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `prod_company` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `qty` int(255) NOT NULL,
-  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`orderid`),
-  KEY `userid` (`userid`) USING BTREE,
-  KEY `prodid` (`prodid`) USING BTREE,
-  KEY `prod_name_foreign_key_in_orderlist` (`prod_name`),
-  KEY `prod_comp_foreign_key_in_orderlist` (`prod_company`),
-  KEY `user_email_id_foreign_key_in_orderlist` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `total_amt` int(255) NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'processing',
+  PRIMARY KEY (`orderid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `orderlist`
 --
 
-INSERT INTO `orderlist` (`orderid`, `userid`, `user_email`, `prodid`, `prod_name`, `prod_company`, `qty`, `status`) VALUES
-(1, 7, 'pramath@gmail.com', 1, 'Dog Food', 'Pedigree', 5, 'processing'),
-(2, 8, 'rushikesh@gmail.com', 6, 'Cat foody', 'Whiskas', 15, 'processing');
+INSERT INTO `orderlist` (`orderid`, `userid`, `user_email`, `prodid`, `prod_name`, `prod_company`, `qty`, `total_amt`, `status`) VALUES
+(1, 7, 'pramath@gmail.com', 6, 'Cat Food', 'Whiskas', 10, 2000, 'shipped');
 
 -- --------------------------------------------------------
 
@@ -130,19 +137,18 @@ CREATE TABLE IF NOT EXISTS `products` (
   `mrp` int(255) NOT NULL,
   `imagename` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`prodid`) USING BTREE,
-  KEY `prod_id_foreign_key_in_products` (`animalid`),
-  KEY `name` (`name`),
-  KEY `company` (`company`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `prod_id_foreign_key_in_products` (`animalid`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`prodid`, `animalid`, `name`, `company`, `qty`, `mrp`, `imagename`) VALUES
-(1, 1, 'Dog Food', 'Pedigree', 50, 500, 'pedigree_dog_food.jpeg'),
-(6, 1, 'Cat foody', 'Whiskas', 40, 200, 'whiskas_cat_food.jpg'),
-(7, 1, 'Dog Belt', 'Pedigree', 40, 200, 'dog_belt.jpg');
+(6, 6, 'Cat Food', 'Whiskas', 5, 200, '5e8cc60c500f77.75229657.jpg'),
+(9, 1, 'Dog Belt', 'Pedigree', 40, 150, '5e8cc5e3a84af7.52822935.jpg'),
+(11, 1, 'Dog food', 'Pedigree', 30, 300, '5e8cc8ad1cfcd1.12931029.jpeg'),
+(12, 7, 'Gold Fish Food', 'Fish O Fish', 22, 150, '5e8cc5a28064e9.75570764.jpg');
 
 -- --------------------------------------------------------
 
@@ -156,8 +162,7 @@ CREATE TABLE IF NOT EXISTS `user_details` (
   `fname` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `lname` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `emailid` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`userid`),
-  KEY `emailid` (`emailid`)
+  PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -178,29 +183,14 @@ INSERT INTO `user_details` (`userid`, `fname`, `lname`, `emailid`) VALUES
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `prodid` FOREIGN KEY (`prodid`) REFERENCES `products` (`prodid`);
+  ADD CONSTRAINT `prod_id_foreign_key_in_cart` FOREIGN KEY (`prodid`) REFERENCES `products` (`prodid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_id_foreign_key_in_cart` FOREIGN KEY (`userid`) REFERENCES `user_details` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `credentials`
 --
 ALTER TABLE `credentials`
   ADD CONSTRAINT `userid` FOREIGN KEY (`userid`) REFERENCES `user_details` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `orderlist`
---
-ALTER TABLE `orderlist`
-  ADD CONSTRAINT `prod_comp_foreign_key_in_orderlist` FOREIGN KEY (`prod_company`) REFERENCES `products` (`company`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `prod_id_foreign_key_in_orderlist` FOREIGN KEY (`prodid`) REFERENCES `products` (`prodid`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `prod_name_foreign_key_in_orderlist` FOREIGN KEY (`prod_name`) REFERENCES `products` (`name`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_email_id_foreign_key_in_orderlist` FOREIGN KEY (`user_email`) REFERENCES `user_details` (`emailid`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_id_foreign_key_in_orderlist` FOREIGN KEY (`userid`) REFERENCES `user_details` (`userid`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `prod_id_foreign_key_in_products` FOREIGN KEY (`animalid`) REFERENCES `animals` (`animalid`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

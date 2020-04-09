@@ -15,7 +15,7 @@ if ($res = mysqli_query($conn, $sql)) {
                                                 <div class="row">
                                                     <div class="col-md-12 ftco-animate">
                                                         <div class="cart-list">   
-                                                            <table class="table">
+                                                            <table class="table bg-light">
                                                                 <thead class="thead-primary">
                                                                     <tr class="text-center">
                                                                         <th>&nbsp</th>
@@ -48,7 +48,7 @@ if ($res = mysqli_query($conn, $sql)) {
                                                 echo'<tbody>
                                     <tr class="text-center  ftco-animate">  
                                         
-                                        <td class="image-prod"><div class="img" style="background-image:url(images/'.$product_image.');"></div></td>
+                                        <td class="image-prod"><div class="img" style="background-image:url(images/product_images/'.$product_image.');"></div></td>
                                         
                                         <td class="product-name">
                                             <h3>'.$product_name.'</h3>
@@ -90,7 +90,7 @@ if ($res = mysqli_query($conn, $sql)) {
 			<div class="container">
 				
     		<div class="row justify-content-end">
-    			<div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
+    			<div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate bg-light">
     				<div class="cart-total mb-3">
     					<h3>Cart Totals</h3>
     					<p class="d-flex">

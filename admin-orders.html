@@ -1,7 +1,7 @@
 <?php
   session_start();
   if($_SESSION["admin"] == NULL ){
-    header("location: index.html");
+    header("location: admin-sign-in.html");
   }
 ?>
 <!DOCTYPE html>
@@ -57,7 +57,7 @@
     <div class="col-md-15">
       <div class="row no-gutters slider-text align-items-center justify-content-center" style="background-color: white;margin-bottom: 30px; opacity: 0.9;">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread">Inventory</h1>
+            <h1 class="mb-0 bread">Orders</h1>
 			<p class="breadcrumbs">
 				<span><a href="admin-pets.html">Pets</a></span> |
 				<span><a href="admin-inventory.html">Inventory</a></span> |

@@ -13,8 +13,7 @@ if ($get_Inventory_Count_res = mysqli_query($conn, $get_Inventory_Count_Query)) 
         $get_Inventory_Count_row = mysqli_fetch_array($get_Inventory_Count_res);
         $inventory_count = (int)$get_Inventory_Count_row['qty'];
         if ($inventory_count >= $qty) {
-			$new_count = $inventory_count - $qty;
-			$update_inventory_count_query = "UPDATE products SET qty = $new_count WHERE prodid = $prod_id;";
+			$update_inventory_count_query = "UPDATE products SET qty = qty - $qty WHERE prodid = $prod_id;";
 			if ($conn->query($update_inventory_count_query) == TRUE) {
 				$update_order_status_query = "UPDATE orderlist SET status = 'shipped' WHERE orderid = $order_id;";
 				if ($conn->query($update_order_status_query) == TRUE) {

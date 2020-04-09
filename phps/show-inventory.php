@@ -58,7 +58,7 @@ if ($res = mysqli_query($conn, $sql)) {
                                         </a>
                                     </td>   
 									
-									<td class="image-prod"><div class="img" style="background-image:url(images/'.$row['imagename'].');"></div></td>
+									<td class="image-prod"><div class="img" style="background-image:url(images/product_images/'.$row['imagename'].');"></div></td>
 									
 									<td class="product-name">
                                         <h3>'.$row['name'].'</h3>

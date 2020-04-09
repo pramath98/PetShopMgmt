@@ -1,12 +1,18 @@
 <?php
 session_start();
 
-$pet_name = $_GET['pet_name'];
-$image_name = $_GET['image_name'];
+$pet_name = $_POST['pet_name'];
+$new_file_name = "";
+
+
+$file = $_FILES['file_name'];
+$folder_name = "pet_images";
+$header_path = 'Location: /petshop_management/admin-inventory.html';
+include 'upload-image.php';
 
 require 'connect.php';
 
-$query="INSERT INTO animals (name, imagename) VALUES ('$pet_name', '$image_name');";
+$query="INSERT INTO animals (name, imagename) VALUES ('$pet_name', '$new_file_name');";
 if ($conn->query($query) == TRUE) {
     $_SESSION["message"] = "New pet inserted !!!";
     //echo "Update successful !!!";

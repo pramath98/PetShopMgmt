@@ -1,7 +1,7 @@
 <?php
   session_start();
   if($_SESSION["admin"] == NULL ){
-    header("location: index.html");
+    header("location: admin-sign-in.html");
   }
 ?>
 <!DOCTYPE html>
@@ -58,7 +58,7 @@
       <div class="col-md-15">
         <div class="row no-gutters slider-text align-items-center justify-content-center" style="background-color: white;margin-bottom: 30px; opacity: 0.9;">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread">Inventory</h1>
+            <h1 class="mb-0 bread">Pets</h1>
 			<p class="breadcrumbs">
 				<span class="mr-1" style="color: brown;">Pets</span> |
 				<span><a href="admin-inventory.html">Inventory</a></span> |
@@ -88,7 +88,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="phps/updatePet.php" method="GET">
+          <form action="phps/updatePet.php" method="POST" enctype="multipart/form-data">
             <div class="form-group" style="display: none;">
               <label for="recipient-name" class="col-form-label">Pet ID</label>
               <input type="text" class="form-control border" placeholder=" " name="update_pet_id" id="update_pet_id" required="">
@@ -96,6 +96,12 @@
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Pet name</label>
               <input type="text" class="form-control border" placeholder=" " name="update_pet_name" id="update_pet_name" required="">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Image File</label> <br/>
+              <label for="update_file_name" class="btn btn-primary py-2 px-4">Upload Image</label>
+              <input type="file" placeholder=" " name="update_file_name" id="update_file_name" style="visibility: hidden;">
+              <p id="update_file_name_label"></p>
             </div>
             <div class="right-w3l">
               <input type="submit" class="btn btn-primary py-2 px-4" value="update">
@@ -106,9 +112,9 @@
       </div>
     </div>
   </div>
-  <!-- //Update inventory modal -->
+  <!-- //Update pet modal -->
 
-  <!-- add new inventory modal -->
+  <!-- add new pet modal -->
   <div class="modal fade" id="addNewPet" tabindex="-1" role="dialog" aria-labelledby="addNewPet" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -119,14 +125,16 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="phps/addNewPet.php" method="GET">
+          <form action="phps/addNewPet.php" method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Pet Name</label>
               <input type="text" class="form-control border" placeholder=" " name="pet_name" id="pet_name" required="">
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Image Name</label>
-              <input type="text" class="form-control border" placeholder=" " name="image_name" id="image_name" required="">
+              <label for="recipient-name" class="col-form-label">Image File</label> <br/>
+              <label for="file_name" class="btn btn-primary py-2 px-4">Upload Image</label>
+              <input type="file" placeholder=" " name="file_name" id="file_name" required="Please select image" style="visibility: hidden;">
+              <p id="file_name_label"></p>
             </div>
             <div class="right-w3l">
               <input type="submit" class="btn btn-primary py-2 px-4" value="save">
@@ -137,7 +145,7 @@
       </div>
     </div>
   </div>
-  <!-- //add new inventory modal -->
+  <!-- //add new pet modal -->
 
   <!-- delete pet modal -->
   <div class="modal fade" id="deletePetModal" tabindex="-1" role="dialog" aria-labelledby="deletePetModal" aria-hidden="">
@@ -228,6 +236,12 @@
     $(window).load(function () {
       $('#messageModal').modal('show');
     });
+    document.querySelector("#file_name").onchange = function(){
+      document.getElementById("file_name_label").textContent = this.files[0].name;
+    }
+    document.querySelector("#update_file_name").onchange = function(){
+      document.getElementById("update_file_name_label").textContent = this.files[0].name;
+    }
   </script>
   <script>
     function update_form_variables(pet_id, pet_name) {
