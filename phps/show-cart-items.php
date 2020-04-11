@@ -62,7 +62,7 @@ if ($res = mysqli_query($conn, $sql)) {
                                         echo' </p>
                                         </td>
                                         
-                                        <td class="price">Rs. '.$product_mrp.'</td>
+                                        <td class="price">₹'.$product_mrp.'</td>
                                         
                                         <td class="price">'.$product_qty.'</td>
                                         
@@ -78,6 +78,7 @@ if ($res = mysqli_query($conn, $sql)) {
                                     
                 
                 }
+                $_SESSION["total_amt"]=$total;
                                 echo'
                                 </table>
                                 </div>
@@ -108,7 +109,6 @@ if ($res = mysqli_query($conn, $sql)) {
     					</p>
     				</div><form action="checkout">
                     <p class="text-center">
-                    <input type="hidden" value="'.$total.'" name="total">
                     <input type="submit" class="btn btn-primary py-3 px-4" value="Proceed to checkout"></a></p>
 					</form>
     			</div>

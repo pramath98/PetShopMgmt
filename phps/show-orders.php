@@ -189,7 +189,7 @@ if ($shippedOrdersRes = mysqli_query($conn, $shippedOrders)) {
             <div class="row justify-content-end">
     			<div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
-    					<h3>Invoice</h3>
+    					<h3>Sales</h3>
     					<hr>
     					<p class="d-flex">
     						<span>Total Shipped Orders</span>

@@ -27,8 +27,9 @@ if ($res = mysqli_query($conn, $sql)) {
 	      <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item"><a class="nav-link"><span>Hello, '.$_SESSION['user'].' </span></a></li>
+            <li class="nav-item"><a href="myorders.html" class="nav-link"><span class="icon-shopping-bag"></span> Your Orders</a></li>
 	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>['.$cart_items.']</a></li>
-            <li class="nav-item"><a href="phps/logout.php" class="nav-link"><span>Log out</span></a></li>
+            <li class="nav-item"><a href="phps/logout.php" class="nav-link">Log out <span class="icon-sign-out"></span></a></li>
             
 	        </ul>
 	      </div>
